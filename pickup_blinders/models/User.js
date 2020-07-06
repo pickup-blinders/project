@@ -8,7 +8,11 @@ const userSchema = new Schema({
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
-  }
+  },
+  comments: Array,
+  posts: Array,
+  
+
 });
 
 const User = mongoose.model('User', userSchema);
