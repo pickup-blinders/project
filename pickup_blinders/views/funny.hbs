@@ -1,12 +1,29 @@
-<h1><a href="">Best</a></h1>
-<h1><a href="">New</a></h1>
+<h1><a href="/feed/funny">Funny</a> OR <a href="/feed/tinder">Tinder</a></h1>
+<div>
+  <button id="best">Best</button>
+  <button id="new">New</button>
+</div>
+
 <h3><a href="/new">Post new Pickup Line</a></h3>
 
 {{#each post}}
 <div>
-  <h1>{{content}}</h1>
+  <a href=""><button class="upVote">Up </button></a>
+  <a href=""><button class="downVote">Down</button></a>
+  <h1>
+    <span id="score">{{score}}</span>
+    {{content}}
+  </h1>
   <a href="">{{userid.username}}</a>
   <a href="">Comments</a>
 </div>
 
+<script>
+  function voteUp(post) {
+    console.log(post.score)
+  }
+  document.querySelectorAll(".upVote").forEach(el => {
+    el.addEventListener("click", voteUp)
+  });
+</script>
 {{/each}}

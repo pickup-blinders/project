@@ -6,11 +6,22 @@ const { populate } = require('../models/User');
 const router  = express.Router();
 
 router.get('/feed/funny', (req, res, next) => {
-  Post.find().populate("userid").then(post => {
+  Post.find({category: "funny"}).sort({created_at: -1}).populate("userid").then(post => {
     res.render('funny', {post: post});
   }).catch(err => {
     console.log(err)
   })
 });
+
+router.get('/feed/tinder', (req, res, next) => {
+  Post.find({category: "tinder"}).populate("userid").then(post => {
+    res.render('funny', {post: post});
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
+
+
 
 module.exports = router;
