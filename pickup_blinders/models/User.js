@@ -3,16 +3,17 @@ const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
-  password: String
-}, {
+  password: String,
+  comments: Array,
+  posts: [
+    { type: Schema.Types.ObjectId, ref: "Post" }
+  ],
+},
+ {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
-  },
-  comments: Array,
-  posts: Array,
-  
-
+  }
 });
 
 const User = mongoose.model('User', userSchema);
