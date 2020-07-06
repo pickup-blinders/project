@@ -1,21 +1,30 @@
-<h1><a href="/feed/funny">Funny</a> OR <a href="/feed/tinder">Tinder</a></h1>
-<div>
+<h1 id="feed">
+  <a href="/feed/funny">Funny</a>
+  <a href="/feed/tinder">Tinder</a>
+  <a href="/feed/funny">Cute</a>
+  <a href="/feed/funny">Smart</a>
+</h1>
+
+<div id="filter">
   <button id="best">Best</button>
   <button id="new">New</button>
 </div>
 
-<h3><a href="/new">Post new Pickup Line</a></h3>
+<h3 id="post">
+  <a href="/new">Post new Pickup Line</a>
+</h3>
 
 {{#each post}}
-<div>
+<div id="pickUpLine">
+  <a href="">{{userid.username}}</a>
+  <div>{{created_at}}</div>
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
-  <a href=""><button class="downVote">Down</button></a>
+  <button class="downVote">Down</button>
+  <span id="score">{{score}}</span>
   <h1>
-    <span id="score">{{score}}</span>
     {{content}}
   </h1>
-  <a href="">{{userid.username}}</a>
-  <a href="">Comments</a>
+  <a href="">Check Comments</a>
 </div>
 {{/each}}
 
@@ -23,15 +32,12 @@
   console.log(axios)
   function voteUp(e) {
     console.log(e.target.id)
-    axios.post(`/vote/${e.target.id}`,{score:e.target.score}).then(response=>{
+    axios.post(`/vote/${e.target.id}`, { score: e.target.score }).then(response => {
       console.log(response)
     })
-  
-  }
 
-  
+  }
   document.querySelectorAll(".upVote").forEach(el => {
     el.addEventListener("click", voteUp)
   });
-
 </script>
