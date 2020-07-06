@@ -8,7 +8,7 @@
 
 {{#each post}}
 <div>
-  <a href=""><button class="upVote">Up </button></a>
+  <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
   <a href=""><button class="downVote">Down</button></a>
   <h1>
     <span id="score">{{score}}</span>
@@ -17,13 +17,21 @@
   <a href="">{{userid.username}}</a>
   <a href="">Comments</a>
 </div>
+{{/each}}
 
 <script>
-  function voteUp(post) {
-    console.log(post.score)
+  console.log(axios)
+  function voteUp(e) {
+    console.log(e.target.id)
+    axios.post(`/vote/${e.target.id}`,{score:e.target.score}).then(response=>{
+      console.log(response)
+    })
+  
   }
+
+  
   document.querySelectorAll(".upVote").forEach(el => {
     el.addEventListener("click", voteUp)
   });
+
 </script>
-{{/each}}
