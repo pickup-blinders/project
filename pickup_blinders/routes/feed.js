@@ -21,6 +21,22 @@ router.get('/feed/tinder', (req, res, next) => {
   })
 });
 
+router.get('/feed/cute', (req, res, next) => {
+  Post.find({ category: "cute" }).sort({ created_at: -1 }).populate("userid").then(post => {
+    res.render('funny', { post: post });
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
+router.get('/feed/smart', (req, res, next) => {
+  Post.find({ category: "smart" }).sort({ created_at: -1 }).populate("userid").then(post => {
+    res.render('funny', { post: post });
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
 router.post("/vote/:id", (req, res) => {
   console.log(req.body)
   console.log("this is recieved from the front end", req.params.id)
