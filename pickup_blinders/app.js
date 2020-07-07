@@ -31,7 +31,7 @@ const app = express();
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Express View engine setup
@@ -73,7 +73,6 @@ app.use(session({
 }))
 app.use(flash());
 require('./passport')(app);
-    
 
 const index = require('./routes/index');
 app.use('/', index);

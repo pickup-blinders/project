@@ -1,8 +1,60 @@
-<h1><a href="">Best</a></h1>
-<h1><a href="">New</a></h1>
+<h1 id="feed">
+  <a href="/feed/funny/best">Funny</a>
+  <a href="/feed/tinder/best">Tinder</a>
+  <a href="/feed/cute/best">Cute</a>
+  <a href="/feed/smart/best">Smart</a>
+</h1>
 
-{{#each }}
-<a href="/profile/{this.id}"></a>
+<div id="filter">
+  <a href="/feed/funny/best">Best</a>
+  <a href="/feed/funny/newest">Newest</a>
+  {{!-- Ajax search --}}
+  <input type="text" id="name" />
+  <button>Search PickUp Lines</button>
+</div>
+
+<h3 id="post">
+  <a href="/new">Post new Pickup Line</a>
+</h3>
+
+{{#each post}}
+<div id="pickUpLine">
+  <a href="/comments/{{this._id}}">Check Comments</a>
+  <a href= "/profile_posts/{{userid._id}}"> {{userid.username}}</a> 
+  <div>{{created_at}}</div>
+  <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
+  <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
+  <span class={{_id}}>{{score}}</span>
+  <h1>
+    {{content}}
+  </h1>
+
+</div>
 {{/each}}
 
-<h3><a href="/new">Post new Pickup Line</a></h3>
+<script>
+  // Ajax && Axios search
+ // axios.get("/posts").then(responseServer=>{
+ //   console.log(responseServer.data)
+ // })
+
+  // Button for Voting Down
+  function voteDown(e) {
+    axios.post(`/downvote/${e.target.id}`).then(response => {
+      document.getElementsByClassName(e.target.id)[0].innerHTML = response.data
+    })
+  };
+  document.querySelectorAll(".downVote").forEach(el => {
+    el.addEventListener("click", voteDown)
+  });
+
+  //Button for Voting Up
+  function voteUp(e) {
+    axios.post(`/vote/${e.target.id}`).then(response => {
+      document.getElementsByClassName(e.target.id)[0].innerHTML = response.data
+    })
+  }
+  document.querySelectorAll(".upVote").forEach(el => {
+    el.addEventListener("click", voteUp)
+  });
+</script>
