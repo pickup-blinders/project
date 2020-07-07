@@ -1,7 +1,6 @@
 const express = require('express');
 const Post = require('../models/Post');
 const User = require('../models/User');
-const { populate } = require('../models/User');
 
 const router = express.Router();
 
