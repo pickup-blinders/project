@@ -38,9 +38,15 @@ router.get('/feed/smart', (req, res, next) => {
 });
 
 router.post("/vote/:id", (req, res) => {
-  console.log(req.body)
-  console.log("this is recieved from the front end", req.params.id)
-  Post.findByIdAndUpdate(req.params.id)
+  Post.findByIdAndUpdate(req.params.id, {$inc: {score: 1}}, {new: true}).then(post => {
+    res.json(post.score); 
+  })
+})
+
+router.post("/downvote/:id", (req, res) => {
+  Post.findByIdAndUpdate(req.params.id, {$inc: {score: -1}}, {new: true}).then(post => {
+    res.json(post.score); 
+  })
 })
 
 

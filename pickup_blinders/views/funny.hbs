@@ -19,8 +19,8 @@
   <a href="">{{userid.username}}</a>
   <div>{{created_at}}</div>
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
-  <button class="downVote">Down</button>
-  <span id="score">{{score}}</span>
+  <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
+  <span class={{_id}}>{{score}}</span>
   <h1>
     {{content}}
   </h1>
@@ -30,12 +30,26 @@
 
 <script>
   console.log(axios)
-  function voteUp(e) {
-    console.log(e.target.id)
-    axios.post(`/vote/${e.target.id}`, { score: e.target.score }).then(response => {
-      console.log(response)
+  // Button for Voting Down
+    function voteDown(e) {
+    // console.log(document.getElementsByClassName(e.target.id)[0])
+    axios.post(`/downvote/${e.target.id}`).then(response => {
+      // console.log(response)
+      document.getElementsByClassName(e.target.id)[0].innerHTML = response.data
     })
+  };
+    document.querySelectorAll(".downVote").forEach(el => {
+    el.addEventListener("click", voteDown)
+  });
 
+//Button for Voting Up
+
+  function voteUp(e) {
+    // console.log(document.getElementsByClassName(e.target.id)[0])
+    axios.post(`/vote/${e.target.id}`).then(response => {
+      // console.log(response)
+      document.getElementsByClassName(e.target.id)[0].innerHTML = response.data
+    })
   }
   document.querySelectorAll(".upVote").forEach(el => {
     el.addEventListener("click", voteUp)
