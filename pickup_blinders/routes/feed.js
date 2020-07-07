@@ -5,7 +5,9 @@ const { populate } = require('../models/User');
 
 const router = express.Router();
 
-router.get('/feed/funny', (req, res, next) => {
+
+// Sorted by Newest
+router.get('/feed/funny/newest', (req, res, next) => {
   Post.find({ category: "funny" }).sort({ created_at: -1 }).populate("userid").then(post => {
     res.render('funny', { post: post });
   }).catch(err => {
@@ -13,15 +15,15 @@ router.get('/feed/funny', (req, res, next) => {
   })
 });
 
-router.get('/feed/tinder', (req, res, next) => {
-  Post.find({ category: "tinder" }).populate("userid").then(post => {
+router.get('/feed/tinder/newest', (req, res, next) => {
+  Post.find({ category: "tinder" }).sort({ created_at: -1 }).populate("userid").then(post => {
     res.render('funny', { post: post });
   }).catch(err => {
     console.log(err)
   })
 });
 
-router.get('/feed/cute', (req, res, next) => {
+router.get('/feed/cute/newest', (req, res, next) => {
   Post.find({ category: "cute" }).sort({ created_at: -1 }).populate("userid").then(post => {
     res.render('funny', { post: post });
   }).catch(err => {
@@ -29,7 +31,7 @@ router.get('/feed/cute', (req, res, next) => {
   })
 });
 
-router.get('/feed/smart', (req, res, next) => {
+router.get('/feed/smart/newest', (req, res, next) => {
   Post.find({ category: "smart" }).sort({ created_at: -1 }).populate("userid").then(post => {
     res.render('funny', { post: post });
   }).catch(err => {
@@ -37,15 +39,50 @@ router.get('/feed/smart', (req, res, next) => {
   })
 });
 
+// Sorted by Rating
+
+router.get('/feed/funny/best', (req, res, next) => {
+  Post.find({ category: "funny" }).sort({score: -1}).populate("userid").then(post => {
+    res.render('funny', { post: post });
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
+router.get('/feed/tinder/best', (req, res, next) => {
+  Post.find({ category: "tinder" }).sort({score: -1}).populate("userid").then(post => {
+    res.render('funny', { post: post });
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
+router.get('/feed/cute/best', (req, res, next) => {
+  Post.find({ category: "cute" }).sort({score: -1}).populate("userid").then(post => {
+    res.render('funny', { post: post });
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
+router.get('/feed/smart/best', (req, res, next) => {
+  Post.find({ category: "smart" }).sort({score: -1}).populate("userid").then(post => {
+    res.render('funny', { post: post });
+  }).catch(err => {
+    console.log(err)
+  })
+});
+
+
 router.post("/vote/:id", (req, res) => {
-  Post.findByIdAndUpdate(req.params.id, {$inc: {score: 1}}, {new: true}).then(post => {
-    res.json(post.score); 
+  Post.findByIdAndUpdate(req.params.id, { $inc: { score: 1 } }, { new: true }).then(post => {
+    res.json(post.score);
   })
 })
 
 router.post("/downvote/:id", (req, res) => {
-  Post.findByIdAndUpdate(req.params.id, {$inc: {score: -1}}, {new: true}).then(post => {
-    res.json(post.score); 
+  Post.findByIdAndUpdate(req.params.id, { $inc: { score: -1 } }, { new: true }).then(post => {
+    res.json(post.score);
   })
 })
 
