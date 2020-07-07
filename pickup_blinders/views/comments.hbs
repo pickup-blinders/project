@@ -1,3 +1,9 @@
+<h1>This are the Post Comments</h1>
+{{#each comment}}
+<h2>{{userid.username}}</h2>
+<h1>{{content}}</h1>
+{{/each}}
+
 <form action="/comments/{{ident}}" method = "POST">
   <label for="content">Give feedback</label>
   <input type="text" name= "content" id="content">

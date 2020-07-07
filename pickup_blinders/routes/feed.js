@@ -94,8 +94,8 @@ router.post("/downvote/:id", (req, res) => {
 //... showing his/her posts
 
 router.get('/profile_posts/:id', (req, res, next) => {
-  User.findById( req.params.id ).sort({ score: -1 }).populate("posts").then(user => {
-    
+  User.findById(req.params.id).sort({ score: -1 }).populate("posts").then(user => {
+
     res.render('profile_posts', { user: user });
     console.log(user)
   }).catch(err => {
@@ -106,7 +106,7 @@ router.get('/profile_posts/:id', (req, res, next) => {
 //... showing his/her comments
 
 router.get('/profile_comments/:id', (req, res, next) => {
-  User.findById( req.params.id ).sort({ score: -1 }).populate("posts.comments").then(user => {
+  User.findById(req.params.id).sort({ score: -1 }).populate("posts.comments").then(user => {
     res.render('profile_posts', { user: user });
     console.log(user)
   }).catch(err => {
@@ -120,41 +120,35 @@ router.get('/profile_comments/:id', (req, res, next) => {
 
 
 router.post('/comments/:id', (req, res, next) => {
-
-  console.log(req.user._id, req.params.id);
-  
- 
-  const { content, score = 0, userid = req.user._id, postid = req.params.id} = req.body; 
-  Comment.create({content, score, userid, postid })
+  const { content, score = 0, userid = req.user._id, postid = req.params.id } = req.body;
+  Comment.create({ content, score, userid, postid })
     .then((comment) => {
-      console.log(comment)
-      User.findByIdAndUpdate(userid,{$push:{comments: comment}}).then(
-        response=>{
-          console.log(comment)
-          console.log(userid)
-          res.redirect('/comments/:id');
-
+      User.findByIdAndUpdate(userid, { $push: { comments: comment } }).then(
+        response => {
+          // res.redirect('/comments/:id');
+          Post.findByIdAndUpdate(postid, { $push: { comments: comment } }).then(
+            responsePost => {
+                    res.redirect(`/comments/${responsePost._id}`);
+            }
+          )
         },
-      Post.findByIdAndUpdate(postid,{$push:{comments: comment}}).then(
-        response=>{
-          console.log(comment)
-          console.log(postid)
-          res.redirect('/comments/:id');
-  
-          }
-      ))
+      )
     })
     .catch(err => {
       next(err);
     })
 })
 
-router.get('/comments/:id', (req,res, next) => { 
+router.get('/comments/:id', (req, res, next) => {
 
   let ident = req.params.id;
-  Comment.findById( ident ).sort({ score: -1}).then(comment => { 
+  console.log(ident)
+  Comment.find({ postid: ident }).sort({ score: -1 }).populate("userid").then(comment => {
+    console.log(comment);
+
     res.render('comments', { comment: comment, ident: ident }
-  )})
+    )
+  })
 
 })
 
