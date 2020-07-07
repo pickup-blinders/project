@@ -7,7 +7,10 @@
 
 <div id="filter">
   <a href="/feed/funny/best">Best</a>
-  <a href="/feed/funny/newest">Newest</a> 
+  <a href="/feed/funny/newest">Newest</a>
+  {{!-- Ajax search --}}
+  <input type="text" id="name" />
+  <button>Search PickUp Lines</button>
 </div>
 
 <h3 id="post">
@@ -25,12 +28,16 @@
   <h1>
     {{content}}
   </h1>
-  
+
 </div>
 {{/each}}
 
 <script>
-  console.log(axios)
+  // Ajax && Axios search
+ // axios.get("/posts").then(responseServer=>{
+ //   console.log(responseServer.data)
+ // })
+
   // Button for Voting Down
   function voteDown(e) {
     axios.post(`/downvote/${e.target.id}`).then(response => {
