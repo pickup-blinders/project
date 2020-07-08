@@ -154,9 +154,7 @@ router.post("/downvote/:id", (req, res) => {
 
 router.get('/profile_posts/:id', (req, res, next) => {
   User.findById(req.params.id).sort({ score: -1 }).populate("posts").then(user => {
-
     res.render('profile_posts', { user: user });
-    console.log(user)
   }).catch(err => {
     console.log(err)
   })
@@ -166,8 +164,7 @@ router.get('/profile_posts/:id', (req, res, next) => {
 
 router.get('/profile_comments/:id', (req, res, next) => {
   User.findById(req.params.id).sort({ score: -1 }).populate("posts.comments").then(user => {
-    res.render('profile_posts', { user: user });
-    console.log(user)
+    res.render('posts_comments', { user: user });
   }).catch(err => {
     console.log(err)
   })
@@ -175,8 +172,7 @@ router.get('/profile_comments/:id', (req, res, next) => {
 
 
 
-//render comments
-
+//Render comments
 
 router.post('/comments/:id', (req, res, next) => {
   const { content, score = 0, userid = req.user._id, postid = req.params.id } = req.body;
@@ -187,7 +183,7 @@ router.post('/comments/:id', (req, res, next) => {
           // res.redirect('/comments/:id');
           Post.findByIdAndUpdate(postid, { $push: { comments: comment } }).then(
             responsePost => {
-                    res.redirect(`/comments/${responsePost._id}`);
+              res.redirect(`/comments/${responsePost._id}`);
             }
           )
         },
