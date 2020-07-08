@@ -22,12 +22,20 @@
   <a href="/comments/{{this._id}}">Check Comments</a>
   <a href= "/profile_posts/{{userid._id}}"> {{userid.username}}</a> 
   <div>{{created_at}}</div>
-  <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
-  <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
+  
   <span class={{_id}}>{{score}}</span>
   <h1>
     {{content}}
   </h1>
+  {{#if voted}}
+  <button class="upVote {{this._id}}" disabled id={{this._id}} score={{this.score}}>Up </button>
+  <button class="downVote {{this._id}}" disabled id={{this._id}} score={{this.score}}>Down</button>
+  <span>You already voted !</span>
+  {{else}}
+  <button class="upVote {{this._id}}" id={{this._id}} score={{this.score}}>Up </button>
+  <button class="downVote {{this._id}}" id={{this._id}} score={{this.score}}>Down</button>
+  {{/if}}
+
 
 </div>
 {{/each}}
@@ -42,6 +50,9 @@
   function voteDown(e) {
     axios.post(`/downvote/${e.target.id}`).then(response => {
       document.getElementsByClassName(e.target.id)[0].innerHTML = response.data
+      
+      //  document.getElementById(e.target.id)[0].innerHTML = response.data
+      
     })
   };
   document.querySelectorAll(".downVote").forEach(el => {
@@ -52,6 +63,17 @@
   function voteUp(e) {
     axios.post(`/vote/${e.target.id}`).then(response => {
       document.getElementsByClassName(e.target.id)[0].innerHTML = response.data
+      
+      console.log(document.getElementsByClassName(e.target.id))
+
+
+      const buttons = document.getElementsByClassName(e.target.id);
+
+      [...buttons].forEach( el => {
+        el.disabled = true ;
+      })
+
+      // if ( pressed === true ) 
     })
   }
   document.querySelectorAll(".upVote").forEach(el => {
