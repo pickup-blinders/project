@@ -1,14 +1,13 @@
-
-
-
 <h1>{{user.username}}</h1>
+<a href="/feed/funny/best">Navigate to Feed</a>
+<br>
+<a href="/profile_posts/{{user._id}}">My Posts</a>
+<a href="/profile_comments/{{user._id}}">My Comments</a>
 
-<a href= "/profile_posts/{{user._id}}">posts</a>
-<a href= "/profile_comments/{{user._id}}">comments</a>
+
 
 {{#each user.posts}}
-
-    <div id="pickUpLine">
+<div id="pickUpLine">
   <a href="">Check Comments</a>
   <div>{{created_at}}</div>
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
@@ -17,8 +16,5 @@
   <h1>
     {{content}}
   </h1>
-
 </div>
-
-{{/each}} 
-
+{{/each}}
