@@ -50,9 +50,8 @@ router.get('/feed/funny/best', (req, res, next) => {
   Post.find({ category: "funny" }).sort({ score: -1 }).populate("userid").then(posts => {
     const newPost = posts.map(post => {
       if (req.user.voted.includes(post._id)) {
-
         post.voted = true;
-       // console.log(post)
+        // console.log(post)
         return post
       } else {
         post.voted = false;
@@ -60,7 +59,7 @@ router.get('/feed/funny/best', (req, res, next) => {
 
       }
     })
-   // console.log(newPost);
+    // console.log(newPost);
     res.render('funny', { post: newPost });
   }).catch(err => {
     console.log(err)
@@ -73,7 +72,7 @@ router.get('/feed/tinder/best', (req, res, next) => {
       if (req.user.voted.includes(post._id)) {
 
         post.voted = true;
-       // console.log(post)
+        // console.log(post)
         return post
       } else {
         post.voted = false;
@@ -81,7 +80,7 @@ router.get('/feed/tinder/best', (req, res, next) => {
 
       }
     })
-   // console.log(newPost);
+    // console.log(newPost);
     res.render('funny', { post: newPost });
   }).catch(err => {
     console.log(err)
@@ -94,7 +93,7 @@ router.get('/feed/cute/best', (req, res, next) => {
       if (req.user.voted.includes(post._id)) {
 
         post.voted = true;
-       // console.log(post)
+        // console.log(post)
         return post
       } else {
         post.voted = false;
@@ -102,7 +101,7 @@ router.get('/feed/cute/best', (req, res, next) => {
 
       }
     })
-   // console.log(newPost);
+    // console.log(newPost);
     res.render('funny', { post: newPost });
   }).catch(err => {
     console.log(err)
@@ -115,7 +114,7 @@ router.get('/feed/smart/best', (req, res, next) => {
       if (req.user.voted.includes(post._id)) {
 
         post.voted = true;
-     //   console.log(post)
+        //   console.log(post)
         return post
       } else {
         post.voted = false;
@@ -158,13 +157,13 @@ router.post("/downvote/:id", (req, res) => {
 
 router.get('/profile_posts/:id', (req, res, next) => {
   User.findById(req.params.id).sort({ score: -1 }).populate("posts").then(user => {
-    if(user._id==req.user._id){
-      user.auth="yes"
+    if (user._id == req.user._id) {
+      user.auth = "yes"
     }
-    else{
-      user.auth=null
+    else {
+      user.auth = null
     }
-    res.render('profile_posts', { user: user});
+    res.render('profile_posts', { user: user });
   }).catch(err => {
     console.log(err)
   })
