@@ -20,7 +20,7 @@
 {{#each post}}
 <div id="pickUpLine">
   <a href="/comments/{{this._id}}">Check Comments</a>
-  <a href= "/profile_posts/{{userid._id}}"> {{userid.username}}</a> 
+  <a href="/profile_posts/{{userid._id}}"> {{userid.username}}</a>
   <div>{{created_at}}</div>
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
   <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
@@ -28,15 +28,14 @@
   <h1>
     {{content}}
   </h1>
-
 </div>
 {{/each}}
 
 <script>
   // Ajax && Axios search
- // axios.get("/posts").then(responseServer=>{
- //   console.log(responseServer.data)
- // })
+  // axios.get("/posts").then(responseServer=>{
+  //   console.log(responseServer.data)
+  // })
 
   // Button for Voting Down
   function voteDown(e) {
