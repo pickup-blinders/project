@@ -58,6 +58,12 @@
       
       //  document.getElementById(e.target.id)[0].innerHTML = response.data
       
+      const buttons = document.getElementsByClassName(e.target.id);
+
+      [...buttons].forEach( el => {
+        el.disabled = true ;
+      })
+
     })
   };
   document.querySelectorAll(".downVote").forEach(el => {
