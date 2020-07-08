@@ -4,8 +4,6 @@
 <a href="/profile_posts/{{user._id}}">My Posts</a>
 <a href="/profile_comments/{{user._id}}">My Comments</a>
 
-
-
 {{#each user.comments}}
 <div id="pickUpLine">
   <div>{{created_at}}</div>
@@ -15,5 +13,11 @@
   <h1>
     {{this.content}}
   </h1>
+
+{{!-- {{#if user.auth}}
+  <a href="/comment/edit/{{this._id}}">Edit my Comment</a>
+{{/if}} --}}
+
+
 </div>
 {{/each}}
