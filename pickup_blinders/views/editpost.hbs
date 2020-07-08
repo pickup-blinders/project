@@ -1,0 +1,11 @@
+<h1>Editing Your Post</h1>
+
+
+<form action="/post/edit/{{post._id}}" method="post">
+<label for="content">Your Content:</label>
+<input type="text" name="content" id="{{post._id}}" value="{{post.content}}">
+<button type="submit">Edit now!</button>
+</form>
+
+<a href="">Delete Your Post</a>
+

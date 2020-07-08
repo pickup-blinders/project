@@ -9,8 +9,9 @@ const router = express.Router();
 
 // Sorted by Newest
 router.get('/feed/funny/newest', (req, res, next) => {
+  let name = req.user.username
   Post.find({ category: "funny" }).sort({ created_at: -1 }).populate("userid").then(post => {
-    res.render('funny', { post: post });
+    res.render('funny', { post: post, name });
   }).catch(err => {
     console.log(err)
   })
@@ -136,12 +137,8 @@ router.post('/comments/:id', (req, res, next) => {
 })
 
 router.get('/comments/:id', (req, res, next) => {
-
   let ident = req.params.id;
-  console.log(ident)
   Comment.find({ postid: ident }).sort({ score: -1 }).populate("userid").then(comment => {
-    console.log(comment);
-
     res.render('comments', { comment: comment, ident: ident }
     )
   })
@@ -157,5 +154,22 @@ router.get('/comments/:id', (req, res, next) => {
 //     res.json(responseDB)
 //   })
 // })
+
+// Editing Post
+
+router.post('/post/edit/:postid', (req, res, next) => {
+  let postContent = req.body.content;
+  Post.findByIdAndUpdate(req.params.postid, {content: postContent}).then(post => {
+    res.redirect("/feed/funny/best")
+  })
+})
+
+router.get('/post/edit/:postid', (req, res, next) => {
+  Post.findById(req.params.postid).then(post => {
+    res.render('editpost', {post: post})
+  })
+})
+
+
 
 module.exports = router;

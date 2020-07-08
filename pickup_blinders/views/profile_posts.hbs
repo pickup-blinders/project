@@ -8,7 +8,6 @@
 
 {{#each user.posts}}
 <div id="pickUpLine">
-  <a href="">Check Comments</a>
   <div>{{created_at}}</div>
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
   <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
@@ -16,5 +15,7 @@
   <h1>
     {{content}}
   </h1>
+  {{!-- Editing Post --}}
+  <a href="/post/edit/{{this._id}}">Edit my Post</a>
 </div>
 {{/each}}
