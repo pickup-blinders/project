@@ -91,14 +91,12 @@ router.get('/feed/cute/best', (req, res, next) => {
   Post.find({ category: "cute" }).sort({ score: -1 }).populate("userid").then(posts => {
     const newPost = posts.map(post => {
       if (req.user.voted.includes(post._id)) {
-
         post.voted = true;
         // console.log(post)
         return post
       } else {
         post.voted = false;
         return post
-
       }
     })
     // console.log(newPost);
@@ -152,7 +150,6 @@ router.post("/downvote/:id", (req, res) => {
 
 
 // find user profile
-
 //... showing his/her posts
 
 router.get('/profile_posts/:id', (req, res, next) => {
@@ -220,9 +217,7 @@ router.get('/comments/:id', (req, res, next) => {
     res.render('comments', { comment: comment, ident: ident }
     )
   })
-
 })
-
 
 // Ajax && Axios Search
 
@@ -269,7 +264,7 @@ router.get('/comment/edit/:commentid', (req, res, next) => {
 router.post('/post/delete/:postid', (req, res, next) => {
   // console.log(req.params.postid)
   Post.findByIdAndDelete(req.params.postid).then((post) => {
-    Comment.deleteMany({_id: {$in: [...post.comments] }}).then(() => {
+    Comment.deleteMany({ _id: { $in: [...post.comments] } }).then(() => {
       res.redirect('/feed/funny/best')
     }).catch(err => {
       console.log(err)

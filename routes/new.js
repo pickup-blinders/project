@@ -8,16 +8,12 @@ router.get('/new', (req, res, next) => {
 });
 
 router.post('/new', (req, res, next) => {
-  const { content, score = 0, userid = req.user._id, comments = [], category} = req.body; 
-  Post.create({content, score, userid, comments, category})
+  const { content, score = 0, userid = req.user._id, comments = [], category } = req.body;
+  Post.create({ content, score, userid, comments, category })
     .then((post) => {
-      console:
-      User.findByIdAndUpdate(userid,{$push:{posts:post}}).then(
-        response=>{
-          console.log(post)
-          console.log(userid)
+      User.findByIdAndUpdate(userid, { $push: { posts: post } }).then(
+        response => {
           res.redirect('/feed/funny/newest');
-
         }
       )
     })

@@ -12,7 +12,6 @@ const commentSchema = new Schema({
   },
 
   //comments: Array,
-
 },
   {
     timestamps: {
