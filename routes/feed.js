@@ -264,6 +264,25 @@ router.get('/comment/edit/:commentid', (req, res, next) => {
   })
 })
 
+// Delete Post
 
+router.post('/post/delete/:postid', (req, res, next) => {
+  // console.log(req.params.postid)
+  Post.findByIdAndDelete(req.params.postid).then((post) => {
+    Comment.deleteMany({_id: {$in: [...post.comments] }}).then(() => {
+      res.redirect('/feed/funny/best')
+    }).catch(err => {
+      console.log(err)
+    })
+  })
+})
+
+router.get('/post/delete/:postid', (req, res, next) => {
+  Post.findByIdAndRemove(req.params.postid).then(post => {
+    console.log(post)
+  }).catch(err => {
+    console.log(err)
+  })
+})
 
 module.exports = router;

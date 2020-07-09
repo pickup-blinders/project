@@ -1,8 +1,8 @@
 <h1>Editing Your Comment</h1>
+<a href="/feed/funny/best">Navigate to feed</a>
 
 <form action="/comment/edit/{{comment._id}}" method="post">
   <label for="content">Your Comment:</label>
   <input type="text" name="content" id="{{comment._id}}" value="{{comment.content}}">
   <button type="submit">Edit now!</button>
 </form>
-<a href="">Delete Your Comment</a>

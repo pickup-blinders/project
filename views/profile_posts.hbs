@@ -10,6 +10,7 @@
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
   <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
   <span class={{_id}}>{{score}}</span>
+
   <h1>
     {{content}}
   </h1>
@@ -18,6 +19,11 @@
 
   {{#if ../isUser}}
   <a href="/post/edit/{{this._id}}">Edit my Post</a>
+  {{!-- <a href="/post/delete/{{this._id}}">Delete my Post</a> --}}
+
+  <form action="/post/delete/{{this._id}}" method="POST">
+    <button type="submit">Delete my Post</button>
+  </form>
   {{/if}}
 
 </div>
