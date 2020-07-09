@@ -1,11 +1,17 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Galada&family=Raleway:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: black;
-  background-color: #FAC6B8;
+  background-color: #bad0b8;
+  background-image: -webkit-linear-gradient(right, #FC7864, #FDA366);
+  background-image: -moz-linear-gradient(right, #FC7864, #FDA366);
+  background-image: -o-linear-gradient(right, #FC7864, #FDA366);
+  background-image: -ms-linear-gradient(right, #FC7864, #FDA366);
+  background-image: linear-gradient(right, #FC7864, #FDA366);
  }
 
  #nav {
@@ -154,5 +160,171 @@ body {
   right: 5%;
 }
 
+#feed {
+  display: flex;
+  position: fixed;
+  justify-content: space-around;
+  width: 70%;
+
+}
+
+#feed a {
+  text-decoration: none;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em;
+}
+
+.feed {
+  background-color: #bad0b8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: -webkit-linear-gradient(right, #FC7864, #FDA366);
+  background-image: -moz-linear-gradient(right, #FC7864, #FDA366);
+  background-image: -o-linear-gradient(right, #FC7864, #FDA366);
+  background-image: -ms-linear-gradient(right, #FC7864, #FDA366);
+  background-image: linear-gradient(right, #FC7864, #FDA366);
+}
+
+.feed a span {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+.feed a {
+  text-decoration: none;
+}
+
+#filter {
+  display: flex;
+  margin-top: 8%;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white
+}
+
+#filter a {
+  
+  margin: 3%;;
+  text-decoration: none;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5em;
+}
+
+#post-call {
+  position: fixed;
+  right: -97%;
+  bottom: 3%;
+}
+
+#post-call a {
+  text-decoration: none;
+  color: white
+}
+
+#pickUpLine {
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 2%;
+  padding: 1%;
+  width: 40%;
+  border-radius: 10px;
+  
+}
+
+#pickUpLine button {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+}
+
+.content-votes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/*#pickUpLine h1 {
+  text-align: center;
+}*/
+
+.quote {
+  font-size: 2em;
+  color: rgba(110, 110, 110, 0.8);
+  font-family: 'Galada', cursive;
+
+}
+
+.comment-image {
+  width: 100%;
+}
+
+
+.content {
+  font-size: 3em;
+  color: rgba(102, 107, 230, 0.6);
+  margin: 3%;
+  padding: 3%;
+  font-family: 'Galada', cursive;
+  letter-spacing: 0.25em;
+}
+
+.pickup-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 3%;
+}
+
+.pickup-info a {
+  width: 8%;
+}
+
+.image-feather {
+  width: 7%;
+}
+
+.arrow-up {
+  width: 5%;
+}
+
+.username {
+  font-family: 'Galada', cursive;
+  color: rgba(180, 180, 180);
+  font-size: 2em;
+}
+
+.post-new {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.post-new form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-new label {
+  font-family: 'Galada', cursive;
+  color: rgba(180, 180, 180);
+  font-size: 2em;
+}
+
+.new-line-input {
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 7%;
+  padding: 3%;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  width: 20%;
+}
 
 /*# sourceMappingURL=style.css.map */

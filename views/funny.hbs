@@ -1,48 +1,66 @@
 
 {{!-- Id the User that is logged in --}}
-
+<div class ="feed">
 <a class="home" href="/">
 <span>Home</span></a>
 <a class="logout" href="/auth/logout"><span>Logout</span></a>
 
 
-<h1 id="feed">
+<nav id="feed">
   <a href="/feed/funny/best">Funny</a>
   <a href="/feed/tinder/best">Tinder</a>
   <a href="/feed/cute/best">Cute</a>
   <a href="/feed/smart/best">Smart</a>
-</h1>
+</nav>
 
 <div id="filter">
   <a href="/feed/funny/best">Best</a>
+  <span>|</span>
   <a href="/feed/funny/newest">Newest</a>
-  {{!-- Ajax search --}}
-  <input type="text" id="name" />
-  <button>Search PickUp Lines</button>
 </div>
 
-<h3 id="post">
-  <a href="/new">Post new Pickup Line</a>
+<h3 id="post-call">
+  <a href="/new"><img class="image-feather" src="https://www.seekpng.com/png/full/19-196319_clipart-of-quill-pen-icon-png-feather-icon.png"></a>
 </h3>
 
 {{#each post}}
+
+
 <div id="pickUpLine">
-  <a href="/comments/{{this._id}}">Check Comments</a>
-  <a href="/profile_posts/{{userid._id}}"> {{userid.username}}</a>
-  <div>{{created_at}}</div>
+
+  <div class ="content-votes">
+
+
   
-  <span class={{_id}}>{{score}}</span>
-  <h1>
-    {{content}}
-  </h1>
   {{#if voted}}
-  <button class="upVote {{this._id}}" disabled id={{this._id}} score={{this.score}}>Up </button>
-  <button class="downVote {{this._id}}" disabled id={{this._id}} score={{this.score}}>Down</button>
-  <span>You already voted !</span>
+  <button class="upVote {{this._id}}" disabled id={{this._id}} score={{this.score}}> Upvote </button>
+  <span>{{score}}</span>
+  <button class="downVote {{this._id}}" disabled id={{this._id}} score={{this.score}}>Downvote</button>
   {{else}}
-  <button class="upVote {{this._id}}" id={{this._id}} score={{this.score}}>Up </button>
-  <button class="downVote {{this._id}}" id={{this._id}} score={{this.score}}>Down</button>
+  <button class="upVote {{this._id}}" id={{this._id}} score={{this.score}}>Upvote</button>
+  {{score}}
+  <button class="downVote {{this._id}}" id={{this._id}} score={{this.score}}>Downvote</button>
   {{/if}}
+
+
+  <h1 class="content">
+     {{content}}
+  </h1>
+
+  </div>
+
+ <div class = "pickup-info">
+ 
+  
+  <a class="username" href="/profile_posts/{{userid._id}}"> {{userid.username}}</a>
+  {{!-- <div>{{created_at}}</div> --}}
+
+  <a href="/comments/{{this._id}}"><img class ="comment-image" src="https://www.seekpng.com/png/detail/119-1196181_comment-comment-icon-png-gray.png"></a>
+
+
+
+ </div>
+  
 
 
 </div>
@@ -95,3 +113,5 @@
     el.addEventListener("click", voteUp)
   });
 </script>
+
+</div>
