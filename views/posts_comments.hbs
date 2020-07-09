@@ -6,17 +6,17 @@
 
 {{#each user.comments}}
 <div id="pickUpLine">
-  <div>{{created_at}}</div>
+  <div>{{this.created_at}}</div>
   <button class="upVote" id={{this._id}} score={{this.score}}>Up </button>
   <button class="downVote" id={{this._id}} score={{this.score}}>Down</button>
   <span class={{_id}}>{{score}}</span>
   <h1>
-    {{this.content}}
+    {{content}}
   </h1>
 
-{{!-- {{#if user.auth}}
+{{!-- {{#if user.auth}} --}}
   <a href="/comment/edit/{{this._id}}">Edit my Comment</a>
-{{/if}} --}}
+{{!-- {{/if}} --}}
 
 </div>
 {{/each}}

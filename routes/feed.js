@@ -172,9 +172,10 @@ router.get('/profile_posts/:id', (req, res, next) => {
 //... showing his/her comments
 
 router.get('/profile_comments/:id', (req, res, next) => {
-  User.findById(req.params.id).sort({ score: -1 }).populate("posts.comments").then(user => {
-
-    res.render('posts_comments', { user: user });
+  User.findById(req.params.id).sort({ score: -1 }).populate("comments").then(user => {
+    console.log(user.comments[0].content)
+    // console.log(user)
+    res.render('posts_comments', { user: user});
   }).catch(err => {
     console.log(err)
   })
@@ -240,19 +241,19 @@ router.get('/post/edit/:postid', (req, res, next) => {
 
 // Editing Comment
 
-// router.post('/comment/edit/:commentid', (req, res, next) => {
-//   let commentContent = req.body.content;
-//   Comment.findByIdAndUpdate(req.params.commentid, { content: commentContent },{new:true}).then(comment => {
-//     console.log(comment)
-//     res.redirect("/feed/funny/best")
-//   })
-// })
+router.post('/comment/edit/:commentid', (req, res, next) => {
+  let commentContent = req.body.content;
+  Comment.findByIdAndUpdate(req.params.commentid, { content: commentContent },{new:true}).then(comment => {
+    console.log(comment)
+    res.redirect("/feed/funny/best")
+  })
+})
 
-// router.get('/comment/edit/:commentid', (req, res, next) => {
-//   Comment.findById(req.params.commentid).then(comment => {
-//     res.render('editcomment', { comment: comment })
-//   })
-// })
+router.get('/comment/edit/:commentid', (req, res, next) => {
+  Comment.findById(req.params.commentid).then(comment => {
+    res.render('editcomment', { comment: comment })
+  })
+})
 
 
 
