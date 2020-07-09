@@ -156,14 +156,21 @@ router.post("/downvote/:id", (req, res) => {
 //... showing his/her posts
 
 router.get('/profile_posts/:id', (req, res, next) => {
+
   User.findById(req.params.id).sort({ score: -1 }).populate("posts").then(user => {
+    let isUser = false;
+    if (user._id.toString() == req.user._id.toString()) {
+      isUser = true;
+    }
+
+    // Separate
     if (user._id == req.user._id) {
       user.auth = "yes"
     }
     else {
       user.auth = null
     }
-    res.render('profile_posts', { user: user });
+    res.render('profile_posts', { user: user, isUser });
   }).catch(err => {
     console.log(err)
   })
@@ -173,9 +180,7 @@ router.get('/profile_posts/:id', (req, res, next) => {
 
 router.get('/profile_comments/:id', (req, res, next) => {
   User.findById(req.params.id).sort({ score: -1 }).populate("comments").then(user => {
-    console.log(user.comments[0].content)
-    // console.log(user)
-    res.render('posts_comments', { user: user});
+    res.render('posts_comments', { user: user });
   }).catch(err => {
     console.log(err)
   })
@@ -243,7 +248,7 @@ router.get('/post/edit/:postid', (req, res, next) => {
 
 router.post('/comment/edit/:commentid', (req, res, next) => {
   let commentContent = req.body.content;
-  Comment.findByIdAndUpdate(req.params.commentid, { content: commentContent },{new:true}).then(comment => {
+  Comment.findByIdAndUpdate(req.params.commentid, { content: commentContent }, { new: true }).then(comment => {
     console.log(comment)
     res.redirect("/feed/funny/best")
   })
