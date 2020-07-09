@@ -26,6 +26,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "babel-install": "2.1.0",
     "nodemon": "^1.12.1"
   }
 }
