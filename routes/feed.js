@@ -163,7 +163,6 @@ router.get('/profile_posts/:id', (req, res, next) => {
       isUser = true;
     }
 
-    // Separate
     if (user._id == req.user._id) {
       user.auth = "yes"
     }
@@ -180,7 +179,12 @@ router.get('/profile_posts/:id', (req, res, next) => {
 
 router.get('/profile_comments/:id', (req, res, next) => {
   User.findById(req.params.id).sort({ score: -1 }).populate("comments").then(user => {
-    res.render('posts_comments', { user: user });
+    let isUser = false;
+    if (user._id.toString() == req.user._id.toString()) {
+      isUser = true;
+      console.log(isUser)
+    }
+    res.render('posts_comments', { user: user, isUser });
   }).catch(err => {
     console.log(err)
   })
